@@ -1,12 +1,17 @@
-const express = require('express');
-const connectDB = require('./DB/connection');
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./DB/connection");
+
 const app = express();
-const port = process.env.PORT || 3000;	
+const port = process.env.PORT || 3000;
 
 connectDB();
-app.use(express.json({ extended: false }));
-app.use('/api/userModel', require('./api/user'));
-	
+
+app.use(cors());
+app.use(express.json());
+
+app.use("/professional", require("./routes/professional"));
+
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
