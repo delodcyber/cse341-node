@@ -1,12 +1,12 @@
+const express = require('express');
+const connectDB = require('./DB/connection');
+const app = express();
+const port = process.env.PORT || 3000;	
 
-
-async function main() {
-	// we'll add code here soon
-}
-
-
-/**
- * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
- * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
- */
-const uri = "mongodb+srv://johnny07:<db_password>@cluster0.wtjdlf7.mongodb.net/?appName=Cluster0";
+connectDB();
+app.use(express.json({ extended: false }));
+app.use('/api/userModel', require('./api/user'));
+	
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
